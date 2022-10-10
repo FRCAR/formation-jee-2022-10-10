@@ -9,7 +9,11 @@ import org.apache.openejb.testing.Classes;
 import org.apache.openejb.testing.Configuration;
 
 import com.bigcorp.booking.dao.ExampleDao;
+import com.bigcorp.booking.dao.RestaurantDao;
+import com.bigcorp.booking.dao.RestaurantTypeDao;
 import com.bigcorp.booking.service.ExampleService;
+import com.bigcorp.booking.service.RestaurantService;
+import com.bigcorp.booking.service.RestaurantTypeService;
 
 @Application
 public class TestWebApp {
@@ -26,9 +30,8 @@ public class TestWebApp {
 	}
 
 	@org.apache.openejb.testing.Module
-	@Classes(cdi = true, value = { 
-			ExampleService.class, ExampleDao.class
-			})
+	@Classes(cdi = true, value = { ExampleService.class, ExampleDao.class, RestaurantTypeService.class,
+			RestaurantService.class, RestaurantTypeDao.class, RestaurantDao.class })
 	public WebApp app() {
 		return new WebApp();
 	}

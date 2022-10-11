@@ -16,4 +16,8 @@ public class RestaurantTypeService {
 		return this.restaurantTypeDao.findById(id);
 	}
 
+	public RestaurantType save(RestaurantType restaurantType) {
+		return this.restaurantTypeDao.save(restaurantType);
+	}
+
 }

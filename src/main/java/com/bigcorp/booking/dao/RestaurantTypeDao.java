@@ -16,4 +16,8 @@ public class RestaurantTypeDao {
 		return this.entityManager.find(RestaurantType.class, id);
 	}
 
+	public RestaurantType save(RestaurantType restaurantType) {
+		return this.entityManager.merge(restaurantType);
+	}
+
 }

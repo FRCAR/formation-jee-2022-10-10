@@ -37,7 +37,15 @@ public class Restaurant {
 
 	@Column(nullable = false)
 	private LocalDateTime openDate = LocalDateTime.now();
-
+	
+	public void associateWith(RestaurantType restaurantType) {
+		this.restaurantType = restaurantType;
+		if(restaurantType == null) {
+			return;
+		}
+		this.restaurantType.getRestaurants().add(this);
+	}
+	
 	public RestaurantType getRestaurantType() {
 		return restaurantType;
 	}
@@ -93,5 +101,6 @@ public class Restaurant {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 
 }

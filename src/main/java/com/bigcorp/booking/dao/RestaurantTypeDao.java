@@ -1,5 +1,7 @@
 package com.bigcorp.booking.dao;
 
+import java.util.List;
+
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +20,21 @@ public class RestaurantTypeDao {
 
 	public RestaurantType save(RestaurantType restaurantType) {
 		return this.entityManager.merge(restaurantType);
+	}
+
+	public RestaurantType findWithRestaurantsById(Long id) {
+		List<RestaurantType> resultList = this.entityManager.createQuery(
+				" select distinct rt  from RestaurantType rt "
+				+ " left outer join fetch  rt.restaurants "
+				+ " where rt.id = :idParam "
+				, RestaurantType.class)
+		.setParameter("idParam", id)
+		.getResultList();
+		if(resultList.isEmpty()) {
+			return null;
+		}
+		//else...
+		return resultList.get(0);
 	}
 
 }

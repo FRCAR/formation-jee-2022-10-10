@@ -26,7 +26,6 @@ public class RestaurantService {
 	@TransactionAttribute
 	public Restaurant findById(long id) {
 		return this.restaurantDao.findById(Restaurant.class, id);
-
 	}
 
 	@TransactionAttribute

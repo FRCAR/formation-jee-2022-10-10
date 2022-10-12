@@ -1,7 +1,8 @@
 
 package com.bigcorp.booking.model;
 
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,25 +26,22 @@ public class Restaurant {
 	private String name;
 
 	@Enumerated(EnumType.STRING)
-	private MonEnum monEnum;
+	private PriceCategory priceCategory;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@Column(name = "RESTAURANT_TYPE_ID")
 	private RestaurantType restaurantType;
 
-	private Long monLong;
-
 	private Boolean active;
-
-	@Column(nullable = false)
-	private LocalDateTime openDate = LocalDateTime.now();
 	
-	public void associateWith(RestaurantType restaurantType) {
-		this.restaurantType = restaurantType;
-		if(restaurantType == null) {
-			return;
-		}
-		this.restaurantType.getRestaurants().add(this);
+	private Set<Booking> bookings = new HashSet<>();
+	
+	public Set<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(Set<Booking> bookings) {
+		this.bookings = bookings;
 	}
 	
 	public RestaurantType getRestaurantType() {
@@ -54,36 +52,12 @@ public class Restaurant {
 		this.restaurantType = restaurantType;
 	}
 
-	public MonEnum getMonEnum() {
-		return monEnum;
-	}
-
-	public void setMonEnum(MonEnum monEnum) {
-		this.monEnum = monEnum;
-	}
-
-	public Long getMonLong() {
-		return monLong;
-	}
-
-	public void setMonLong(Long monLong) {
-		this.monLong = monLong;
-	}
-
 	public Boolean getActive() {
 		return active;
 	}
 
 	public void setActive(Boolean active) {
 		this.active = active;
-	}
-
-	public LocalDateTime getOpenDate() {
-		return openDate;
-	}
-
-	public void setOpenDate(LocalDateTime openDate) {
-		this.openDate = openDate;
 	}
 
 	public Long getId() {
@@ -101,6 +75,28 @@ public class Restaurant {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public PriceCategory getPriceCategory() {
+		return priceCategory;
+	}
+
+	public void setPriceCategory(PriceCategory priceCategory) {
+		this.priceCategory = priceCategory;
+	}
+
+	public void associateWith(RestaurantType restaurantType) {
+		this.restaurantType = restaurantType;
+		if(restaurantType == null) {
+			return;
+		}
+		this.restaurantType.getRestaurants().add(this);
+	}
 	
+	public void associateWith(Booking booking) {
+		if(booking != null) {
+			this.bookings.add(booking);
+			booking.setRestaurant(this);
+		}
+	}
 
 }

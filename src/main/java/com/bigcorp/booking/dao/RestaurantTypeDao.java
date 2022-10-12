@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import com.bigcorp.booking.model.RestaurantType;
 
 @Singleton
-public class RestaurantTypeDao {
+public class RestaurantTypeDao extends AbstractDao<RestaurantType> {
 
 	@PersistenceContext
 	protected EntityManager entityManager;

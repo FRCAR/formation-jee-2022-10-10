@@ -12,7 +12,7 @@ public class RestaurantTypeService {
 	@Inject
 	RestaurantTypeDao restaurantTypeDao;
 
-	public RestaurantType findById(long id) {
+	public RestaurantType findById(Long id) {
 		return this.restaurantTypeDao.findById(id);
 	}
 

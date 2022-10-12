@@ -6,6 +6,6 @@
 </head>
 <% String message = "hello"; %>
 <body>
-<h1>Welcome to Tomcat!!!! I wanna say <%= message %> </h1>
+<h1>Le nom du restaurant est  <%= MonDaoSingleton.getInstance().getRestaurant().getName() %> </h1>
 </body>
 </html>

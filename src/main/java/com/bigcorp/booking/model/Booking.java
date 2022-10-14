@@ -28,7 +28,7 @@ public class Booking {
 	private Integer size;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "RESTAURANT_ID", nullable = false)
+	@Column(name = "RESTAURANT_ID")
 	private Restaurant restaurant;
 
 	public Long getId() {
